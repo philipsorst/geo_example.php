@@ -1,0 +1,16 @@
+{% extends 'DdrGeoExampleBaseBundle::base.html.twig' %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Geo Example</h1>
+    </div>
+    {{ form(form) }}
+    {% if cities is defined and cities is not empty %}
+        <hr/>
+        <ul>
+            {% for city in cities %}
+                <li><a href="{{ path('ddr_geo_example_city_detail', {'id': city.id}) }}">{{ city.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

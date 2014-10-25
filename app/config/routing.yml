@@ -1,0 +1,4 @@
+ddr_geo_example_base:
+    resource: "@DdrGeoExampleBaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
