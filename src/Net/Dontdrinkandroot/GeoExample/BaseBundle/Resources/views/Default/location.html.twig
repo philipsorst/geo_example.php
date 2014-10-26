@@ -1,0 +1,22 @@
+{% extends 'DdrGeoExampleBaseBundle::base.html.twig' %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>My Location</h1>
+    </div>
+
+    <section>
+        <h2>Info</h2>
+        <p>Latitude: {{ lat }}</p>
+        <p>Longitude: {{ lng }}</p>
+    </section>
+
+    <section>
+        <h2>Nearby Cities</h2>
+        <ul>
+            {% for nearbyCity in nearbyCities %}
+                <li><a href="{{ path('ddr_geo_example_city_detail', {'id': nearbyCity.id}) }}">{{ nearbyCity.name }} [{{ nearbyCity.distance }}km]</a></li>
+                {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

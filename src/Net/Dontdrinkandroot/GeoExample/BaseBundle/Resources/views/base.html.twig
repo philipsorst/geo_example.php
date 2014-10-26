@@ -7,8 +7,6 @@
     {% block stylesheet %}
         <link rel="stylesheet" type="text/css"
               href="https://design.dontdrinkandroot.net/7/dontdrinkandroot/css/style.css" media="screen"/>
-        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/ddrfetchtoolweb/css/style.css') }}"
-              media="screen"/>
     {% endblock %}
 </head>
 <body>
@@ -26,7 +24,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Left</a></li>
+                    <li><a href="#" id="mylocation">My Location</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Right</a></li>
@@ -35,6 +33,7 @@
         </div>
     </nav>
 </header>
+
 <div id="content" class="container">
     {% block content %}{% endblock %}
 </div>
@@ -42,6 +41,28 @@
 {% block javascript %}
     <script type="text/javascript" src="https://static.dontdrinkandroot.net/jquery/2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://static.dontdrinkandroot.net/bootstrap/3.2/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var locationUrl = "{{ path('ddr_geo_example_location') }}";
+        $(function() {
+            $('#mylocation').click(function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            console.log(position);
+                            window.location = locationUrl + '?lat=' + position.coords.latitude + '&lng=' + position.coords.longitude;
+                        },
+                        function(error) {
+                            console.error(error);
+                            alert(error.message);
+                        }
+                    );
+                } else {
+                    console.error('Geolocation not supported');
+                }
+                return false;
+            })
+        });
+    </script>
 {% endblock %}
 
 </body>

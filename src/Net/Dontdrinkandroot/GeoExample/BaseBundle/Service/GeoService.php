@@ -52,7 +52,7 @@ class GeoService
         return $rows[0];
     }
 
-    public function findNearbyCities($city, $maxDistance)
+    public function findNearbyCities($lat, $lng, $maxDistance)
     {
         // @formatter:off
         $sql = 'SELECT ' .
@@ -70,7 +70,7 @@ class GeoService
             'ORDER BY distance ASC ';
 //            'LIMIT 0 , 20;';
         // @formatter:on
-        $rows = $this->connection->fetchAll($sql, ['lat' => $city['lat'], 'lng' => $city['lng'], 'maxDistance' => $maxDistance]);
+        $rows = $this->connection->fetchAll($sql, ['lat' => $lat, 'lng' => $lng, 'maxDistance' => $maxDistance]);
 
         return $rows;
     }

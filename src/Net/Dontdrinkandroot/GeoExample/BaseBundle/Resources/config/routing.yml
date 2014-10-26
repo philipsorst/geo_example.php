@@ -5,3 +5,7 @@ ddr_geo_example_base_homepage:
 ddr_geo_example_city_detail:
     path: /city/{id}
     defaults: { _controller: DdrGeoExampleBaseBundle:Default:cityDetail }
+
+ddr_geo_example_location:
+    path: /location
+    defaults: { _controller: DdrGeoExampleBaseBundle:Default:location }

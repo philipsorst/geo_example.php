@@ -42,9 +42,17 @@ class DefaultController extends Controller
     public function cityDetailAction(Request $request, $id)
     {
         $city = $this->getGeoService()->getCity($id);
-        $nearbyCities = $this->getGeoService()->findNearbyCities($city, 50);
+        $nearbyCities = $this->getGeoService()->findNearbyCities($city['lat'], $city['lng'], 50);
 
         return $this->render('DdrGeoExampleBaseBundle:Default:cityDetail.html.twig', ['city' => $city, 'nearbyCities' => $nearbyCities]);
+    }
+
+    public function locationAction(Request $request) {
+        $lat = $request->query->get('lat');
+        $lng = $request->query->get('lng');
+        $nearbyCities = $this->getGeoService()->findNearbyCities($lat, $lng, 50);
+
+        return $this->render('DdrGeoExampleBaseBundle:Default:location.html.twig', ['lat' => $lat, 'lng' => $lng, 'nearbyCities' => $nearbyCities]);
     }
 
     /**
